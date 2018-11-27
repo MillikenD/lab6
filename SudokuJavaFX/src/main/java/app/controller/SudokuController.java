@@ -88,6 +88,10 @@ public class SudokuController implements Initializable {
 		BuildGrids();
 	}
 
+	@FXML
+	private void btnEndGame(ActionEvent event) {
+		
+	}
 	/**
 	 * CreateSudokuInstance - Create an instance of Sudoku, set the attribute in the 'Game' class
 	 * 
@@ -294,7 +298,8 @@ public class SudokuController implements Initializable {
 						event.consume();
 					}
 				});
-
+				
+				// removes red panes on exit
 				paneTarget.setOnDragExited(new EventHandler<DragEvent>() {
 					public void handle(DragEvent event) {
 						SudokuStyler.RemoveGridStyling(gridPaneSudoku);
@@ -324,9 +329,15 @@ public class SudokuController implements Initializable {
 
 							if (!s.isValidValue(CellTo.getiRow(), CellTo.getiCol(), CellFrom.getiCellValue())) {
 								if (game.getShowHints()) {
-
+									
+									s.AddMistakes(1);
+									System.out.println(s.getiMistakes());
+									
+									if(s.getiMistakes() >= s.getMaxMistakes()) {
+										//TODO: implement this block of code.
+										//end the game
+									}
 								}
-
 							}
 
 							//	This is the code that is actually taking the cell value from the drag-from 
@@ -355,4 +366,5 @@ public class SudokuController implements Initializable {
 		InputStream is = getClass().getClassLoader().getResourceAsStream("img/" + iValue + ".png");
 		return new Image(is);
 	}
+	
 }

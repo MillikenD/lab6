@@ -14,37 +14,36 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 import pkgEnum.eGameDifficulty;
 
-public class GameBorderController implements Initializable  {
+public class GameBorderController implements Initializable {
 
-	private Game game;	
+	private Game game;
 
-	
 	@FXML
 	private MenuBar mnuMenu;
-	
+
 	@FXML
 	private ToggleGroup tgDifficulty;
-	
+
 	@FXML
 	private ToggleGroup tgPuzzleSize;
-	
+
 	@FXML
 	private CheckMenuItem chkShowHints;
-	
+
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {	
+	public void initialize(URL location, ResourceBundle resources) {
 	}
-	public void setMainApp(Game game)
-	{
+
+	public void setMainApp(Game game) {
 		this.game = game;
 	}
+
 	@FXML
 	private void mnuPuzzleSizeChange(ActionEvent event) {
-	
-		RadioMenuItem mi = (RadioMenuItem)event.getSource();
+
+		RadioMenuItem mi = (RadioMenuItem) event.getSource();
 		System.out.println(mi.getId());
-		switch (mi.getId())
-		{
+		switch (mi.getId()) {
 		case "4":
 			this.game.setStageWidth(400);
 			break;
@@ -54,26 +53,26 @@ public class GameBorderController implements Initializable  {
 
 		}
 		System.out.println("Puzzle Size Changed");
-		
-		
+
 	}
+
 	public eGameDifficulty geteGameDifficulty() {
-		
-		RadioMenuItem mi = (RadioMenuItem)tgDifficulty.getSelectedToggle(); 		
+
+		RadioMenuItem mi = (RadioMenuItem) tgDifficulty.getSelectedToggle();
 		eGameDifficulty eGD = eGameDifficulty.get(mi.getId());
 		return eGD;
 	}
-	
-	public int getPuzzleSize()
-	{
-		RadioMenuItem mi = (RadioMenuItem)tgPuzzleSize.getSelectedToggle(); 	
-		return Integer.parseInt(mi.getId());		
+
+	public int getPuzzleSize() {
+		RadioMenuItem mi = (RadioMenuItem) tgPuzzleSize.getSelectedToggle();
+		return Integer.parseInt(mi.getId());
+	}
+
+	public boolean getShowHints() {
+		return chkShowHints.isSelected();
 	}
 	
-	public boolean getShowHints()
-	{
-		return 	chkShowHints.isSelected();
+	public int getMistakes() {
+		return 
 	}
-	
-	
 }
